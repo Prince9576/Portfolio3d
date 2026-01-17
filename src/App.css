@@ -1,0 +1,60 @@
+/* Mobile-specific styles to disable context menus and text selection */
+@media (hover: none) and (pointer: coarse) {
+  * {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+  }
+  
+  /* Allow text selection in input fields and textareas */
+  input, textarea, [contenteditable] {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+  }
+  
+  /* Prevent image drag and save dialogs */
+  img {
+    -webkit-touch-callout: none !important;
+    -webkit-user-drag: none !important;
+    -khtml-user-drag: none !important;
+    -moz-user-drag: none !important;
+    -o-user-drag: none !important;
+    pointer-events: none !important;
+  }
+  
+  /* Re-enable pointer events for interactive elements */
+  button, a, input, textarea, [role="button"], [tabindex] {
+    pointer-events: auto !important;
+  }
+}
+
+/* Mobile-only Contact Page adjustments */
+@media (max-width: 768px) {
+  .contact-page-container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .contact-form-container {
+    left: 0;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* Snackbar Animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 100%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 180" width="400" height="360" role="img" aria-label="Rounded-corner triangle down">
+  <polygon
+    points="100,162 24,30 176,30"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="3"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+    vector-effect="non-scaling-stroke"/>
+</svg>

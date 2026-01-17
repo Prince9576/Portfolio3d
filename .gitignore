@@ -1,0 +1,40 @@
+# Node modules
+node_modules/
+
+# macOS
+.DS_Store
+
+# Build outputs
+build/
+dist/
+
+# Caches
+.cache/
+
+# Coverage
+coverage/
+
+# Yarn PnP
+.pnp/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Bundles
+*.min.js
+*.bundle.js
+
+# Environment files
+.env
+.env.*.local
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Misc
+Thumbs.db
+*.swp
