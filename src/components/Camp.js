@@ -40,7 +40,7 @@ const Camp = ({setFloating,
     );
 
     return () => unsub();
-  }, [camp, scooter, camera.position, camera.rotation, camera.zoom, subscribeKeys, returnBackToOriginal]);
+  }, [camp, scooter, camera.position, camera.rotation, camera.zoom, subscribeKeys]);
 
 
   function handlePointerEnter(event) {

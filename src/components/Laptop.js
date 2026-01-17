@@ -1,13 +1,9 @@
 import {
   Html,
-  useBounds,
   useGLTF,
-  useKeyboardControls,
 } from "@react-three/drei";
 import { useEffect, useRef, memo } from "react";
 import { addShadows } from "../utils/addShadows";
-import { useThree } from "@react-three/fiber";
-import gsap from "gsap";
 import Tooltip from "./Tooltip";
 import { isMobile } from "../utils/mobileDetection";
 import About from "./About";
@@ -19,13 +15,8 @@ const Laptop = memo(
     const coffee = useGLTF("/models/coffee.glb", true);
     const controller = useGLTF("/models/controller.glb", true);
 
-    const { camera } = useThree();
-    const [subscribeKeys] = useKeyboardControls();
-    const originalCameraState = useRef(null);
-    const bounds = useBounds();
     const localSceneRef = useRef();
     const laptopRef = useRef();
-    const isExperienceZoomedRef = useRef(isExperienceZoomed);
 
     const mobile = isMobile();
 
@@ -34,94 +25,13 @@ const Laptop = memo(
       addShadows(stump);
       addShadows(controller);
       addShadows(laptop);
+    }, [coffee, stump, controller, laptop]);
 
-      originalCameraState.current = {
-        position: camera.position.clone(),
-        rotation: camera.rotation.clone(),
-        zoom: camera.zoom,
-      };
-
-      const unsub = subscribeKeys(
-        (state) => state.esc,
-        (pressed) => {
-          if (pressed === true && isExperienceZoomedRef.current) {
-            returnBackToOriginal();
-          }
-        }
-      );
-
-      return () => unsub();
-    }, [coffee, stump, controller, laptop, camera.position, camera.rotation, camera.zoom, subscribeKeys, returnBackToOriginal]);
-
-    useEffect(() => {
-      isExperienceZoomedRef.current = isExperienceZoomed;
-    }, [isExperienceZoomed]);
-
-    function handleLaptopClick(event) {
-      if (!isExperienceZoomed) {
-        event.stopPropagation();
-        if (localSceneRef.current) {
-          gsap.to(localSceneRef.current.rotation, {
-            y: -0.2,
-            z: -0.1,
-            x: 0.2,
-            duration: 0.8,
-            ease: "power2.out",
-          });
-        }
-        bounds.refresh(laptopRef.current).fit();
-        setTimeout(() => {
-          setIsExperienceZoomed(true);
-        }, 1050);
-        setFloating(false);
-      }
-    }
-
-    function handleDoubleClick(event) {
-      if (isExperienceZoomed && mobile) {
-        event.stopPropagation();
-        returnBackToOriginal();
-      }
-    }
-
-    function returnBackToOriginal() {
-      if (originalCameraState.current) {
-        gsap.to(camera.position, {
-          x: originalCameraState.current.position.x,
-          y: originalCameraState.current.position.y,
-          z: originalCameraState.current.position.z,
-          duration: 1.5,
-          ease: "power2.inOut",
-        });
-
-        gsap.to(camera.rotation, {
-          x: originalCameraState.current.rotation.x,
-          y: originalCameraState.current.rotation.y,
-          z: originalCameraState.current.rotation.z,
-          duration: 1.5,
-          ease: "power2.inOut",
-        });
-
-        if (localSceneRef.current) {
-          gsap.to(localSceneRef.current.rotation, {
-            y: 0,
-            duration: 1.5,
-            ease: "power2.inOut",
-          });
-        }
-
-        setTimeout(() => {
-          setIsExperienceZoomed(false);
-          setFloating(true);
-        }, 1500);
-      }
-    }
 
     return (
       <group
         ref={localSceneRef}
         position={[-3.4 + (mobile ? 1.1 : 0), 5.3, 4.3 + (mobile ? 0.9 : 0)]}
-        onDoubleClick={handleDoubleClick}
       >
         <primitive
           object={stump.scene}
@@ -131,7 +41,7 @@ const Laptop = memo(
           receiveShadow
         />
 
-        <group ref={laptopRef} onClick={handleLaptopClick}>
+        <group ref={laptopRef}>
           <primitive
             position={[0.15, 0.775, -0.15]}
             object={laptop.scene}
