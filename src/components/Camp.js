@@ -1,5 +1,5 @@
 import { useBounds, useGLTF, useKeyboardControls } from "@react-three/drei";
-import { useEffect, useRef, memo } from "react";
+import { useEffect, useRef, memo, useCallback } from "react";
 import { addShadows } from "../utils/addShadows";
 import { useThree } from "@react-three/fiber";
 import gsap from "gsap";
@@ -68,7 +68,7 @@ const Camp = ({setFloating,
     }
   }
 
-  function returnBackToOriginal() {
+  const returnBackToOriginal = useCallback(() => {
     if (localSceneRef.current) {
       gsap.to(localSceneRef.current.rotation, {
         y: 0,
@@ -95,7 +95,7 @@ const Camp = ({setFloating,
       setIsExperienceZoomed(false);
     }, 1050);
     setFloating(true);
-  }
+  }, [camera])
 
   useEffect(() => {
     isExperienceZoomedRef.current = isExperienceZoomed;
