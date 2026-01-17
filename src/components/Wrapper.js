@@ -5,7 +5,6 @@ import { EffectComposer, ToneMapping } from "@react-three/postprocessing";
 import { ToneMappingMode } from "postprocessing";
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import Loader from "./Loader";
-import Plane from "./Plane";
 import Modal from "./Modal";
 import Contact from "./Contact";
 import { colors } from "../theme";
@@ -76,9 +75,7 @@ const Wrapper = () => {
       >
         <Suspense
           fallback={
-            <Plane>
-              <Loader progress={progress} />
-            </Plane>
+            <Loader progress={progress} isLoading={isLoading} />
           }
         >
           <hemisphereLight />
