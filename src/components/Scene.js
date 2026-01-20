@@ -2,6 +2,7 @@ import { Bounds, Center, Float, PresentationControls } from '@react-three/drei';
 import Clouds from './Clouds';
 import { Island } from './Island';
 import { useRef, useState } from 'react';
+import { useFrame } from '@react-three/fiber';
 import { isMobile } from '../utils/mobileDetection';
 import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier';
 import Football from './Football';
@@ -22,9 +23,18 @@ const Scene = ({
   mobileControls,
   jumpRef,
   isLoading,
+  onSceneRendered,
 }) => {
   const [floating, setFloating] = useState(true);
   const dirLightRef = useRef();
+  const _rendered = useRef(false);
+
+  useFrame(() => {
+    if (!_rendered.current) {
+      _rendered.current = true;
+      if (typeof onSceneRendered === 'function') onSceneRendered();
+    }
+  });
   return (
     <>
       <GradientSkySphere />

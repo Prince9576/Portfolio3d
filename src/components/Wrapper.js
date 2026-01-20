@@ -21,6 +21,7 @@ const Wrapper = () => {
   const [shouldRender, setShouldRender] = useState(false);
   const { isLoading, setIsLoading } = useLoading();
   const { progress, loaded } = usePreloadAssets();
+  const [sceneRendered, setSceneRendered] = useState(false);
   const [sceneReady, setSceneReady] = useState(false);
 
   const [isMobileView, setIsMobileView] = useState(false);
@@ -44,13 +45,12 @@ const Wrapper = () => {
   }, [isOpen]);
 
   useEffect(() => {
-    if (loaded && sceneReady) {
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 300);
+    if (loaded && sceneRendered) {
+      // small delay to ensure final painting, loader component will fade out
+      const timer = setTimeout(() => setIsLoading(false), 100);
       return () => clearTimeout(timer);
     }
-  }, [loaded, sceneReady, setIsLoading]);
+  }, [loaded, sceneRendered, setIsLoading]);
 
   return (
     <>
@@ -85,6 +85,7 @@ const Wrapper = () => {
             mobileControls={mobileControls}
             jumpRef={jumpRef}
             isLoading={isLoading}
+            onSceneRendered={() => setSceneRendered(true)}
           />
           <SoftShadows size={10} samples={12} focus={0.5} />
 

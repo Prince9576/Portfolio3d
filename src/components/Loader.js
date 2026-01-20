@@ -1,7 +1,27 @@
+import { useEffect, useState } from 'react';
 import { colors } from '../theme';
 
 const Loader = ({ progress = 0, isLoading = false, isMobileView = false }) => {
-  if (!isLoading) return null;
+  const [visible, setVisible] = useState(isLoading);
+  const [exiting, setExiting] = useState(false);
+  const fadeMs = 600;
+
+  useEffect(() => {
+    let t;
+    if (isLoading) {
+      setVisible(true);
+      setExiting(false);
+    } else if (visible) {
+      setExiting(true);
+      t = setTimeout(() => {
+        setVisible(false);
+        setExiting(false);
+      }, fadeMs);
+    }
+    return () => clearTimeout(t);
+  }, [isLoading, visible]);
+
+  if (!visible) return null;
 
   const pct = Math.round(Math.min(Math.max(progress, 0), 100));
 
@@ -19,7 +39,9 @@ const Loader = ({ progress = 0, isLoading = false, isMobileView = false }) => {
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 9999,
-        pointerEvents: 'auto',
+        pointerEvents: isLoading ? 'auto' : 'none',
+        opacity: exiting ? 0 : 1,
+        transition: `opacity ${fadeMs}ms ease`,
       }}
     >
       <div
@@ -33,23 +55,31 @@ const Loader = ({ progress = 0, isLoading = false, isMobileView = false }) => {
           width: isMobileView ? '85%' : '50%',
           maxWidth: '900px',
           boxSizing: 'border-box',
-          position: 'relative',
-          transform: 'translateY(2rem)',
         }}
       >
         <img
           src='/images/doodle_loader.png'
           alt='loader doodle'
           style={{
-            width: isMobileView ? 80 : 150,
+            width: isMobileView ? 100 : 180,
             height: 'auto',
             display: 'block',
             objectFit: 'contain',
-            position: 'absolute',
-            bottom: 0,
-            transform: isMobileView ? 'translateY(-21px)' : 'translateY(-16px)',
           }}
         />
+
+        <div
+          aria-live='polite'
+          style={{
+            color: colors.accent[500],
+            fontSize: isMobileView ? 32 : 48,
+            fontWeight: 800,
+            lineHeight: 1,
+            textAlign: 'center',
+          }}
+        >
+          {pct}%
+        </div>
 
         <div className='loader-progress-container' style={{ width: '100%' }}>
           <div className='loader-progress-track'>
