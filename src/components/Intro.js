@@ -130,6 +130,7 @@ export default function Intro() {
           style={{
             width: isMobileView ? '90px' : '120px',
           }}
+          className='image-doodle'
         />
       </div>
     </div>

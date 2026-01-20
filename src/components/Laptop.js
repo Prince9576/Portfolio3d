@@ -56,6 +56,7 @@ const Laptop = memo(({ isExperienceZoomed, setIsExperienceZoomed, setFloating })
             width: `${950}px`,
             height: `${650}px`,
             pointerEvents: isExperienceZoomed ? 'auto' : 'none',
+            zIndex: 10,
           }}
         >
           <div className='laptop-about-page'>

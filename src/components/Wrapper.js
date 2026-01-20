@@ -4,10 +4,10 @@ import { SoftShadows } from '@react-three/drei';
 import { EffectComposer, ToneMapping } from '@react-three/postprocessing';
 import { ToneMappingMode } from 'postprocessing';
 import { Suspense, lazy, useEffect, useRef, useState } from 'react';
-import Loader from './Loader';
 import Modal from './Modal';
 import Contact from './Contact';
 import { colors } from '../theme';
+import Loader from './Loader';
 import { isMobile } from '../utils/mobileDetection';
 import Controls from './Controls';
 import Intro from './Intro';
@@ -73,7 +73,7 @@ const Wrapper = () => {
           setTimeout(() => setSceneReady(true), 500);
         }}
       >
-        <Suspense fallback={<Loader progress={progress} isLoading={isLoading} />}>
+        <Suspense fallback={null}>
           <hemisphereLight />
           <fog attach='fog' args={[colors.sky.fog, 10, 25]} />
           <LazyScene
@@ -94,48 +94,7 @@ const Wrapper = () => {
         </Suspense>
       </Canvas>
 
-      {isLoading && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            background: 'linear-gradient(135deg, #0F0F23 0%, #1a0933 100%)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 9999,
-            pointerEvents: 'none',
-          }}
-        >
-          <div
-            style={{
-              position: 'relative',
-              width: isMobileView ? '160px' : '200px',
-              height: isMobileView ? '160px' : '200px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <div className='ball'>
-              <div className='inner'></div>
-            </div>
-            <div className='shadow'></div>
-          </div>
-          <div
-            style={{
-              color: '#F97316',
-              fontSize: isMobileView ? '1rem' : '1.25rem',
-              fontWeight: '600',
-              marginTop: isMobileView ? '1.5rem' : '2rem',
-            }}
-          ></div>
-        </div>
-      )}
+      <Loader progress={progress} isLoading={isLoading} isMobileView={isMobileView} />
 
       {/* Mobile Controller - Outside Canvas */}
       <Controls
