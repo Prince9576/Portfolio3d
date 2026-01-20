@@ -8,15 +8,17 @@
     -ms-user-select: none !important;
     user-select: none !important;
   }
-  
+
   /* Allow text selection in input fields and textareas */
-  input, textarea, [contenteditable] {
+  input,
+  textarea,
+  [contenteditable] {
     -webkit-user-select: text !important;
     -moz-user-select: text !important;
     -ms-user-select: text !important;
     user-select: text !important;
   }
-  
+
   /* Prevent image drag and save dialogs */
   img {
     -webkit-touch-callout: none !important;
@@ -26,9 +28,14 @@
     -o-user-drag: none !important;
     pointer-events: none !important;
   }
-  
+
   /* Re-enable pointer events for interactive elements */
-  button, a, input, textarea, [role="button"], [tabindex] {
+  button,
+  a,
+  input,
+  textarea,
+  [role='button'],
+  [tabindex] {
     pointer-events: auto !important;
   }
 }
@@ -39,7 +46,7 @@
     flex-direction: column;
     padding: 1rem;
   }
-  
+
   .contact-form-container {
     left: 0;
     width: 100%;

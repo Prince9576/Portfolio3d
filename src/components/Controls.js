@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { isMobile } from "../utils/mobileDetection";
-import { useLoading } from "../contexts/LoadingContext";
+import React, { useState, useEffect } from 'react';
+import { isMobile } from '../utils/mobileDetection';
+import { useLoading } from '../contexts/LoadingContext';
 
 const Controls = ({ onMove, onJump }) => {
   const [activeButtons, setActiveButtons] = useState({
@@ -16,10 +16,10 @@ const Controls = ({ onMove, onJump }) => {
   useEffect(() => {
     if (mobile) {
       const disableContextMenu = (e) => e.preventDefault();
-      document.addEventListener("contextmenu", disableContextMenu);
+      document.addEventListener('contextmenu', disableContextMenu);
 
       return () => {
-        document.removeEventListener("contextmenu", disableContextMenu);
+        document.removeEventListener('contextmenu', disableContextMenu);
       };
     }
   }, [mobile]);
@@ -65,82 +65,78 @@ const Controls = ({ onMove, onJump }) => {
   if (!mobile || isLoading) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4">
-      <div className="flex justify-between items-center max-w-md mx-auto gap-2">
+    <div className='fixed bottom-0 left-0 right-0 z-50 p-4'>
+      <div className='flex justify-between items-center max-w-md mx-auto gap-2'>
         {/* Left Arrow */}
         <button
           className={`flex-1 aspect-square rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm flex items-center justify-center transition-all duration-150 ${
-            activeButtons.left ? "bg-white/20 border-white/50 scale-95" : ""
+            activeButtons.left ? 'bg-white/20 border-white/50 scale-95' : ''
           }`}
           onTouchStart={(e) => {
             e.preventDefault();
-            handleButtonPress("left");
+            handleButtonPress('left');
           }}
           onTouchEnd={(e) => {
             e.preventDefault();
-            handleButtonRelease("left");
+            handleButtonRelease('left');
           }}
           onMouseDown={(e) => {
             e.preventDefault();
-            handleButtonPress("left");
+            handleButtonPress('left');
           }}
           onMouseUp={(e) => {
             e.preventDefault();
-            handleButtonRelease("left");
+            handleButtonRelease('left');
           }}
           onMouseLeave={(e) => {
             e.preventDefault();
-            handleButtonRelease("left");
+            handleButtonRelease('left');
           }}
           onContextMenu={preventContextMenu}
-          style={{ touchAction: "none", userSelect: "none" }}
+          style={{ touchAction: 'none', userSelect: 'none' }}
         >
           <img
-            src="/images/arrow_left.svg"
-            alt="Left"
-            className="w-6 h-6 filter brightness-0 invert"
+            src='/images/arrow_left.svg'
+            alt='Left'
+            className='w-6 h-6 filter brightness-0 invert'
           />
         </button>
 
         {/* Up Arrow */}
         <button
           className={`flex-1 aspect-square rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm flex items-center justify-center transition-all duration-150 ${
-            activeButtons.up ? "bg-white/20 border-white/50 scale-95" : ""
+            activeButtons.up ? 'bg-white/20 border-white/50 scale-95' : ''
           }`}
           onTouchStart={(e) => {
             e.preventDefault();
-            handleButtonPress("up");
+            handleButtonPress('up');
           }}
           onTouchEnd={(e) => {
             e.preventDefault();
-            handleButtonRelease("up");
+            handleButtonRelease('up');
           }}
           onMouseDown={(e) => {
             e.preventDefault();
-            handleButtonPress("up");
+            handleButtonPress('up');
           }}
           onMouseUp={(e) => {
             e.preventDefault();
-            handleButtonRelease("up");
+            handleButtonRelease('up');
           }}
           onMouseLeave={(e) => {
             e.preventDefault();
-            handleButtonRelease("up");
+            handleButtonRelease('up');
           }}
           onContextMenu={preventContextMenu}
-          style={{ touchAction: "none", userSelect: "none" }}
+          style={{ touchAction: 'none', userSelect: 'none' }}
         >
-          <img
-            src="/images/arrow_up.svg"
-            alt="Up"
-            className="w-6 h-6 filter brightness-0 invert"
-          />
+          <img src='/images/arrow_up.svg' alt='Up' className='w-6 h-6 filter brightness-0 invert' />
         </button>
 
         {/* Jump Button */}
         <button
           className={`flex-1 aspect-square rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm flex items-center justify-center transition-all duration-150 ${
-            activeButtons.jump ? "bg-white/20 border-white/50 scale-95" : ""
+            activeButtons.jump ? 'bg-white/20 border-white/50 scale-95' : ''
           }`}
           onTouchStart={(e) => {
             e.preventDefault();
@@ -163,16 +159,16 @@ const Controls = ({ onMove, onJump }) => {
             handleJumpRelease();
           }}
           onContextMenu={preventContextMenu}
-          style={{ touchAction: "none", userSelect: "none" }}
+          style={{ touchAction: 'none', userSelect: 'none' }}
         >
           <img
-            src="/images/arrow_jump.svg"
-            alt="Jump"
-            className="filter brightness-0 invert"
+            src='/images/arrow_jump.svg'
+            alt='Jump'
+            className='filter brightness-0 invert'
             style={{
-              height: "3rem",
-              width: "2rem",
-              marginTop: "0.25rem",
+              height: '3rem',
+              width: '2rem',
+              marginTop: '0.25rem',
             }}
           />
         </button>
@@ -180,70 +176,70 @@ const Controls = ({ onMove, onJump }) => {
         {/* Down Arrow */}
         <button
           className={`flex-1 aspect-square rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm flex items-center justify-center transition-all duration-150 ${
-            activeButtons.down ? "bg-white/20 border-white/50 scale-95" : ""
+            activeButtons.down ? 'bg-white/20 border-white/50 scale-95' : ''
           }`}
           onTouchStart={(e) => {
             e.preventDefault();
-            handleButtonPress("down");
+            handleButtonPress('down');
           }}
           onTouchEnd={(e) => {
             e.preventDefault();
-            handleButtonRelease("down");
+            handleButtonRelease('down');
           }}
           onMouseDown={(e) => {
             e.preventDefault();
-            handleButtonPress("down");
+            handleButtonPress('down');
           }}
           onMouseUp={(e) => {
             e.preventDefault();
-            handleButtonRelease("down");
+            handleButtonRelease('down');
           }}
           onMouseLeave={(e) => {
             e.preventDefault();
-            handleButtonRelease("down");
+            handleButtonRelease('down');
           }}
           onContextMenu={preventContextMenu}
-          style={{ touchAction: "none", userSelect: "none" }}
+          style={{ touchAction: 'none', userSelect: 'none' }}
         >
           <img
-            src="/images/arrow_down.svg"
-            alt="Down"
-            className="w-6 h-6 filter brightness-0 invert"
+            src='/images/arrow_down.svg'
+            alt='Down'
+            className='w-6 h-6 filter brightness-0 invert'
           />
         </button>
 
         {/* Right Arrow */}
         <button
           className={`flex-1 aspect-square rounded-lg border-2 border-white/30 bg-white/10 backdrop-blur-sm flex items-center justify-center transition-all duration-150 ${
-            activeButtons.right ? "bg-white/20 border-white/50 scale-95" : ""
+            activeButtons.right ? 'bg-white/20 border-white/50 scale-95' : ''
           }`}
           onTouchStart={(e) => {
             e.preventDefault();
-            handleButtonPress("right");
+            handleButtonPress('right');
           }}
           onTouchEnd={(e) => {
             e.preventDefault();
-            handleButtonRelease("right");
+            handleButtonRelease('right');
           }}
           onMouseDown={(e) => {
             e.preventDefault();
-            handleButtonPress("right");
+            handleButtonPress('right');
           }}
           onMouseUp={(e) => {
             e.preventDefault();
-            handleButtonRelease("right");
+            handleButtonRelease('right');
           }}
           onMouseLeave={(e) => {
             e.preventDefault();
-            handleButtonRelease("right");
+            handleButtonRelease('right');
           }}
           onContextMenu={preventContextMenu}
-          style={{ touchAction: "none", userSelect: "none" }}
+          style={{ touchAction: 'none', userSelect: 'none' }}
         >
           <img
-            src="/images/arrow_right.svg"
-            alt="Right"
-            className="w-6 h-6 filter brightness-0 invert"
+            src='/images/arrow_right.svg'
+            alt='Right'
+            className='w-6 h-6 filter brightness-0 invert'
           />
         </button>
       </div>

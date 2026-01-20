@@ -12,32 +12,38 @@ This directory contains the centralized theming system for the 3D portfolio appl
 ## Color Palette
 
 ### Primary Colors (Purple)
+
 - **50-900**: Purple scale from lightest to darkest
 - **500**: Main brand color (`#7B68EE` - Soft Lavender)
 - **700**: Dark purple for shadows (`#5B21B6`)
 
 ### Accent Colors (Orange)
-- **50-900**: Orange scale from lightest to darkest  
+
+- **50-900**: Orange scale from lightest to darkest
 - **500**: Main accent color (`#F97316` - Warm Orange)
 - **600**: Hover state (`#EA580C`)
 
 ### Sky & Environment
+
 - `sky.top`: Light Periwinkle (`#B8B5FF`)
 - `sky.mid`: Soft Lavender (`#7B68EE`)
 - `sky.bottom`: White (`#FFFFFF`)
 - `sky.fog`: Light blue fog (`#EAF6F6`)
 
 ### Ground & Platform
+
 - `ground.dirt`: Deep purple (`#5B3EA4`)
 - `ground.grass`: Darker purple (`#4C1D95`)
 - `ground.platform`: Warm orange (`#F26A30`)
 
 ### Nature Colors
+
 - `nature.foliage`: Navy blue (`#1B1643`)
 - `nature.foliageLight`: Lighter tree tone (`#2D245A`)
 - `nature.bark`: Purple bark (`#8B5CF6`)
 
 ### Tech Brand Colors
+
 - `tech.javascript`: Yellow (`#F7DF1E`)
 - `tech.angular`: Red (`#DD0031`)
 - `tech.react`: Blue (`#61DAFB`)
@@ -47,6 +53,7 @@ This directory contains the centralized theming system for the 3D portfolio appl
 - `tech.github`: Black (`#181717`)
 
 ### Semantic Colors
+
 - `semantic.success`: Green (`#10B981`)
 - `semantic.warning`: Yellow (`#F59E0B`)
 - `semantic.error`: Red (`#EF4444`)
@@ -61,11 +68,11 @@ import { useTheme, colors } from '../theme';
 
 function MyComponent() {
   const theme = useTheme();
-  
+
   // Access colors
   const primaryColor = colors.primary[500];
   const accentColor = theme.getColor('accent.500');
-  
+
   // Use predefined styles
   const buttonStyle = theme.styles.button.primary;
 }
@@ -103,6 +110,7 @@ import { colors } from '../theme';
 ## Color Scale
 
 Each color family follows a 50-900 scale:
+
 - **50**: Lightest shade
 - **100-400**: Light shades
 - **500**: Base color

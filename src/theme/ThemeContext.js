@@ -15,12 +15,12 @@ export const ThemeProvider = ({ children }) => {
   const theme = {
     colors,
     colorCombinations,
-    
+
     // Utility functions
     getColor: (path) => {
       return path.split('.').reduce((obj, key) => obj?.[key], colors);
     },
-    
+
     // Common style objects
     styles: {
       button: {
@@ -30,7 +30,7 @@ export const ThemeProvider = ({ children }) => {
           border: `1px solid ${colors.primary[600]}`,
           '&:hover': {
             backgroundColor: colors.primary[600],
-          }
+          },
         },
         accent: {
           backgroundColor: colors.accent[500],
@@ -38,10 +38,10 @@ export const ThemeProvider = ({ children }) => {
           border: `1px solid ${colors.accent[600]}`,
           '&:hover': {
             backgroundColor: colors.accent[600],
-          }
-        }
+          },
+        },
       },
-      
+
       input: {
         default: {
           backgroundColor: colors.neutral[800] + '40', // 40% opacity
@@ -51,7 +51,7 @@ export const ThemeProvider = ({ children }) => {
             borderColor: colors.accent[500],
             outline: 'none',
             boxShadow: `0 0 0 1px ${colors.accent[500]}`,
-          }
+          },
         },
         error: {
           backgroundColor: colors.neutral[800] + '40',
@@ -61,10 +61,10 @@ export const ThemeProvider = ({ children }) => {
             borderColor: colors.semantic.error,
             outline: 'none',
             boxShadow: `0 0 0 1px ${colors.semantic.error}`,
-          }
-        }
+          },
+        },
       },
-      
+
       card: {
         default: {
           backgroundColor: colors.background.primary,
@@ -77,9 +77,9 @@ export const ThemeProvider = ({ children }) => {
           border: `1px solid ${colors.border.dark}`,
           borderRadius: '0.5rem',
           boxShadow: colors.shadow.medium,
-        }
+        },
       },
-      
+
       modal: {
         backdrop: {
           backgroundColor: colors.background.modal,
@@ -89,16 +89,12 @@ export const ThemeProvider = ({ children }) => {
           backgroundColor: colors.background.primary,
           borderRadius: '1rem',
           boxShadow: colors.shadow.dark,
-        }
-      }
-    }
+        },
+      },
+    },
   };
 
-  return (
-    <ThemeContext.Provider value={theme}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>;
 };
 
 export default ThemeContext;

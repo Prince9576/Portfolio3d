@@ -1,18 +1,18 @@
-import { Canvas } from "@react-three/fiber";
-import * as THREE from "three";
-import { SoftShadows } from "@react-three/drei";
-import { EffectComposer, ToneMapping } from "@react-three/postprocessing";
-import { ToneMappingMode } from "postprocessing";
-import { Suspense, lazy, useEffect, useRef, useState } from "react";
-import Loader from "./Loader";
-import Modal from "./Modal";
-import Contact from "./Contact";
-import { colors } from "../theme";
-import { isMobile } from "../utils/mobileDetection";
-import Controls from "./Controls";
-import Intro from "./Intro";
-import { useLoading } from "../contexts/LoadingContext";
-import { usePreloadAssets } from "../hooks/usePreloadAssets";
+import { Canvas } from '@react-three/fiber';
+import * as THREE from 'three';
+import { SoftShadows } from '@react-three/drei';
+import { EffectComposer, ToneMapping } from '@react-three/postprocessing';
+import { ToneMappingMode } from 'postprocessing';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import Loader from './Loader';
+import Modal from './Modal';
+import Contact from './Contact';
+import { colors } from '../theme';
+import { isMobile } from '../utils/mobileDetection';
+import Controls from './Controls';
+import Intro from './Intro';
+import { useLoading } from '../contexts/LoadingContext';
+import { usePreloadAssets } from '../hooks/usePreloadAssets';
 
 const Wrapper = () => {
   const [isExperienceZoomed, setIsExperienceZoomed] = useState(false);
@@ -33,8 +33,8 @@ const Wrapper = () => {
     };
 
     checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const Wrapper = () => {
   return (
     <>
       <Canvas
-        className="r3f"
+        className='r3f'
         shadows
         gl={{
           antialias: true,
@@ -73,13 +73,9 @@ const Wrapper = () => {
           setTimeout(() => setSceneReady(true), 500);
         }}
       >
-        <Suspense
-          fallback={
-            <Loader progress={progress} isLoading={isLoading} />
-          }
-        >
+        <Suspense fallback={<Loader progress={progress} isLoading={isLoading} />}>
           <hemisphereLight />
-          <fog attach="fog" args={[colors.sky.fog, 10, 25]} />
+          <fog attach='fog' args={[colors.sky.fog, 10, 25]} />
           <LazyScene
             isOpen={isOpen}
             setIsOpen={setIsOpen}
@@ -101,41 +97,41 @@ const Wrapper = () => {
       {isLoading && (
         <div
           style={{
-            position: "fixed",
+            position: 'fixed',
             top: 0,
             left: 0,
-            width: "100vw",
-            height: "100vh",
-            background: "linear-gradient(135deg, #0F0F23 0%, #1a0933 100%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
+            width: '100vw',
+            height: '100vh',
+            background: 'linear-gradient(135deg, #0F0F23 0%, #1a0933 100%)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
             zIndex: 9999,
-            pointerEvents: "none",
+            pointerEvents: 'none',
           }}
         >
           <div
             style={{
-              position: "relative",
-              width: isMobileView ? "160px" : "200px",
-              height: isMobileView ? "160px" : "200px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              position: 'relative',
+              width: isMobileView ? '160px' : '200px',
+              height: isMobileView ? '160px' : '200px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
-            <div className="ball">
-              <div className="inner"></div>
+            <div className='ball'>
+              <div className='inner'></div>
             </div>
-            <div className="shadow"></div>
+            <div className='shadow'></div>
           </div>
           <div
             style={{
-              color: "#F97316",
-              fontSize: isMobileView ? "1rem" : "1.25rem",
-              fontWeight: "600",
-              marginTop: isMobileView ? "1.5rem" : "2rem",
+              color: '#F97316',
+              fontSize: isMobileView ? '1rem' : '1.25rem',
+              fontWeight: '600',
+              marginTop: isMobileView ? '1.5rem' : '2rem',
             }}
           ></div>
         </div>
@@ -154,12 +150,10 @@ const Wrapper = () => {
       <Intro />
 
       {isExperienceZoomed && (
-        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
-          <div className="bg-primary-900 bg-opacity-80 text-text-primary px-6 py-3 rounded-lg shadow-lg backdrop-blur-sm">
-            <p className="text-sm font-medium">
-              {isMobileView
-                ? "Double tap to zoom out"
-                : "Press Escape to zoom out"}
+        <div className='fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50'>
+          <div className='bg-primary-900 bg-opacity-80 text-text-primary px-6 py-3 rounded-lg shadow-lg backdrop-blur-sm'>
+            <p className='text-sm font-medium'>
+              {isMobileView ? 'Double tap to zoom out' : 'Press Escape to zoom out'}
             </p>
           </div>
         </div>
@@ -181,4 +175,4 @@ const Wrapper = () => {
 
 export default Wrapper;
 
-const LazyScene = lazy(() => import("./Scene"));
+const LazyScene = lazy(() => import('./Scene'));

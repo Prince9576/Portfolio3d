@@ -1,13 +1,13 @@
-import { Text3D, useMatcapTexture } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useRef, useMemo, memo } from "react";
-import * as THREE from "three";
-import { colors } from "../theme";
+import { Text3D, useMatcapTexture } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { useRef, useMemo, memo } from 'react';
+import * as THREE from 'three';
+import { colors } from '../theme';
 
 const geometry = new THREE.SphereGeometry(0.25, 16);
 
 const Loader = memo(({ progress = 0 }) => {
-  const [baseMatcap] = useMatcapTexture("5B4CBC_B59AF2_9B84EB_8F78E4");
+  const [baseMatcap] = useMatcapTexture('5B4CBC_B59AF2_9B84EB_8F78E4');
   const materials = useMemo(
     () => ({
       text: new THREE.MeshMatcapMaterial({
@@ -35,9 +35,7 @@ const Loader = memo(({ progress = 0 }) => {
           dot.material.color.set(colors.primary[100]);
         });
         if (dotRefs.current[currentDotIndex % 3]) {
-          dotRefs.current[currentDotIndex % 3].material.color.set(
-            colors.neutral[400]
-          );
+          dotRefs.current[currentDotIndex % 3].material.color.set(colors.neutral[400]);
         }
         if (currentDotIndex >= 2) {
           currentDotIndex = 0;
@@ -53,7 +51,7 @@ const Loader = memo(({ progress = 0 }) => {
     <>
       <Text3D
         rotation-x={-0.25}
-        font="/fonts/raleway-semibold.json"
+        font='/fonts/raleway-semibold.json'
         curveSegments={10}
         brevelSegments={1}
         bevelEnabled

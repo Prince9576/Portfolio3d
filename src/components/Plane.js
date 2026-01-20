@@ -1,10 +1,10 @@
-import { Center, Sky, useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { Center, Sky, useGLTF } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { useRef } from 'react';
 
 const Plane = ({ children }) => {
   const ref = useRef();
-  const { scene } = useGLTF("/models/paperplane.glb");
+  const { scene } = useGLTF('/models/paperplane.glb');
 
   useFrame((state) => {
     if (ref.current) {
@@ -26,13 +26,7 @@ const Plane = ({ children }) => {
       />
       <ambientLight intensity={1} />
       <directionalLight intensity={2.5} />
-      <primitive
-        ref={ref}
-        object={scene}
-        scale={8}
-        rotation-y={-(Math.PI * 0.25)}
-        position-y={1}
-      />
+      <primitive ref={ref} object={scene} scale={8} rotation-y={-(Math.PI * 0.25)} position-y={1} />
       <Center position-y={-0.5}>{children}</Center>
     </Center>
   );

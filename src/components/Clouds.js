@@ -1,9 +1,9 @@
-import React, { memo } from "react";
-import { useGLTF } from "@react-three/drei";
-import { isMobile } from "../utils/mobileDetection";
+import React, { memo } from 'react';
+import { useGLTF } from '@react-three/drei';
+import { isMobile } from '../utils/mobileDetection';
 
 const Clouds = (props) => {
-  const { nodes, materials } = useGLTF("/models/clouds.glb", true);
+  const { nodes, materials } = useGLTF('/models/clouds.glb', true);
 
   // Detect if this is left or right cloud based on position
   const isLeftCloud = props.position && props.position[0] < 0;
@@ -12,7 +12,9 @@ const Clouds = (props) => {
   const mobile = isMobile();
 
   // Calculate mobile position offsets with your tested values
-  const mobileX = props.position ? props.position[0] + (mobile ? (isLeftCloud ? 3.9 : -3.9) : 0) : 0;
+  const mobileX = props.position
+    ? props.position[0] + (mobile ? (isLeftCloud ? 3.9 : -3.9) : 0)
+    : 0;
   const mobileY = props.position ? props.position[1] + (mobile ? (isLeftCloud ? 1.9 : 0.9) : 0) : 0;
   const mobileZ = props.position ? props.position[2] : 0;
 

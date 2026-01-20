@@ -1,23 +1,18 @@
-import {
-  Bounds,
-  Center,
-  Float,
-  PresentationControls,
-} from "@react-three/drei";
-import Clouds from "./Clouds";
-import { Island } from "./Island";
-import { useRef, useState } from "react";
-import { isMobile } from "../utils/mobileDetection";
-import { Physics, RigidBody, CuboidCollider } from "@react-three/rapier";
-import Football from "./Football";
-import * as THREE from "three";
-import Trees from "./Trees";
-import Nature from "./Nature";
-import Laptop from "./Laptop";
-import Goku from "./Goku";
-import Camp from "./Camp";
-import Bonfire from "./Bonfire";
-import { colors } from "../theme";
+import { Bounds, Center, Float, PresentationControls } from '@react-three/drei';
+import Clouds from './Clouds';
+import { Island } from './Island';
+import { useRef, useState } from 'react';
+import { isMobile } from '../utils/mobileDetection';
+import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier';
+import Football from './Football';
+import * as THREE from 'three';
+import Trees from './Trees';
+import Nature from './Nature';
+import Laptop from './Laptop';
+import Goku from './Goku';
+import Camp from './Camp';
+import Bonfire from './Bonfire';
+import { colors } from '../theme';
 
 const Scene = ({
   isExperienceZoomed,
@@ -58,14 +53,14 @@ const Scene = ({
               shadow-camera-near={1}
               shadow-camera-far={30}
               shadow-bias={-0.0008}
-              color="#ffffff"
+              color='#ffffff'
             />
 
-            <ambientLight intensity={0.01} color="#ddddff" />
+            <ambientLight intensity={0.01} color='#ddddff' />
 
             <Physics>
               <group position-y={-3}>
-                <RigidBody type="fixed" restitution={0} friction={1}>
+                <RigidBody type='fixed' restitution={0} friction={1}>
                   {[
                     { position: [-5.0, 7.3, -2.1], rotation: [0, -0.46, 0] },
                     { position: [5.0, 7.4, 2.1], rotation: [0, -0.37, 0] },
@@ -84,19 +79,15 @@ const Scene = ({
                     />
                   ))}
                 </RigidBody>
-                <RigidBody type="fixed" friction={1} restitution={0}>
+                <RigidBody type='fixed' friction={1} restitution={0}>
                   <Center>
                     <Island scale={7.5} scale-x={9} />
                   </Center>
                 </RigidBody>
 
                 <group position-z={-2}>
-                  <RigidBody type="fixed" friction={1} restitution={0}>
-                    <Bounds
-                      maxDuration={1}
-                      observe
-                      margin={isMobile() ? 0.5 : 0.3}
-                    >
+                  <RigidBody type='fixed' friction={1} restitution={0}>
+                    <Bounds maxDuration={1} observe margin={isMobile() ? 0.5 : 0.3}>
                       <Laptop
                         isExperienceZoomed={isExperienceZoomed}
                         setIsExperienceZoomed={setIsExperienceZoomed}
@@ -105,15 +96,15 @@ const Scene = ({
                     </Bounds>
                   </RigidBody>
 
-                  <RigidBody type="fixed">
+                  <RigidBody type='fixed'>
                     <Goku />
                   </RigidBody>
 
-                  <RigidBody type="fixed">
+                  <RigidBody type='fixed'>
                     <Nature setIsOpen={setIsOpen} />
                   </RigidBody>
 
-                  <RigidBody type="fixed">
+                  <RigidBody type='fixed'>
                     <Bounds maxDuration={1} observe margin={0.035}>
                       <Camp
                         isZoomedRef={isZoomedRef}
@@ -124,14 +115,11 @@ const Scene = ({
                     </Bounds>
                   </RigidBody>
 
-                  <RigidBody type="fixed">
+                  <RigidBody type='fixed'>
                     <Bonfire />
                   </RigidBody>
 
-                  <Football
-                    mobileControls={mobileControls}
-                    onJumpRef={jumpRef}
-                  />
+                  <Football mobileControls={mobileControls} onJumpRef={jumpRef} />
                   <Trees />
                 </group>
               </group>

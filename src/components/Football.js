@@ -1,10 +1,10 @@
-import { useGLTF, useKeyboardControls } from "@react-three/drei";
-import { RigidBody, useRapier } from "@react-three/rapier";
-import { useEffect, useMemo, useRef, useState, useCallback, memo } from "react";
-import { addShadows } from "../utils/addShadows";
-import { useFrame } from "@react-three/fiber";
-import * as THREE from "three";
-import { Howl } from "howler";
+import { useGLTF, useKeyboardControls } from '@react-three/drei';
+import { RigidBody, useRapier } from '@react-three/rapier';
+import { useEffect, useMemo, useRef, useState, useCallback, memo } from 'react';
+import { addShadows } from '../utils/addShadows';
+import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
+import { Howl } from 'howler';
 
 const Football = ({ mobileControls, onJumpRef }) => {
   const [subscribeKeys, getKeys] = useKeyboardControls();
@@ -13,12 +13,12 @@ const Football = ({ mobileControls, onJumpRef }) => {
   const footballSound = useMemo(
     () =>
       new Howl({
-        src: ["/sounds/football.mp3"],
+        src: ['/sounds/football.mp3'],
         volume: 0.75,
       }),
     []
   );
-  const football = useGLTF("/models/football.glb", true);
+  const football = useGLTF('/models/football.glb', true);
   const footballRef = useRef();
   const radiusRef = useRef();
 
@@ -30,10 +30,10 @@ const Football = ({ mobileControls, onJumpRef }) => {
 
     // Check for keyboard input
     let hasKeyboardInput = forward || backward || leftward || rightward;
-    
+
     // Check for mobile input
     let hasMobileInput = mobileControls && (mobileControls.x !== 0 || mobileControls.y !== 0);
-    
+
     if (!hasKeyboardInput && !hasMobileInput) return;
 
     const impulseStrength = delta * 0.8;
@@ -57,16 +57,20 @@ const Football = ({ mobileControls, onJumpRef }) => {
 
     // Mobile controls - match keyboard exactly
     if (hasMobileInput) {
-      if (mobileControls.y > 0) { // up/forward
+      if (mobileControls.y > 0) {
+        // up/forward
         impulse.z -= impulseStrength * 0.5;
       }
-      if (mobileControls.y < 0) { // down/backward
+      if (mobileControls.y < 0) {
+        // down/backward
         impulse.z += impulseStrength * 2;
       }
-      if (mobileControls.x < 0) { // left
+      if (mobileControls.x < 0) {
+        // left
         impulse.x -= impulseStrength * 1.5;
       }
-      if (mobileControls.x > 0) { // right
+      if (mobileControls.x > 0) {
+        // right
         impulse.x += impulseStrength * 1.5;
       }
     }
@@ -128,21 +132,18 @@ const Football = ({ mobileControls, onJumpRef }) => {
     };
   }, [football, onJumpRef, subscribeKeys, jump]);
 
-
- 
-
   const lastSoundTime = useRef(0);
-  
+
   function handleFootballCollision() {
     if (!ready) return;
-    
+
     const now = Date.now();
     if (now - lastSoundTime.current < 200) return;
-    
+
     lastSoundTime.current = now;
     const vel = footballRef.current.linvel();
     const speed = Math.sqrt(vel.x ** 2 + vel.y ** 2 + vel.z ** 2);
-    
+
     if (speed > 1) {
       const volume = Math.min(Math.max(speed / 8, 0.1), 0.6);
       footballSound.volume(volume);
@@ -155,7 +156,7 @@ const Football = ({ mobileControls, onJumpRef }) => {
     <RigidBody
       friction={1}
       canSleep={false}
-      colliders="ball"
+      colliders='ball'
       ref={footballRef}
       position={[0.75, 6.5, 2.5]}
       linearDamping={0.5}

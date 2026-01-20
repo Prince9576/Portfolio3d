@@ -1,22 +1,22 @@
-import { useGLTF } from "@react-three/drei";
-import { useState, useEffect } from "react";
+import { useGLTF } from '@react-three/drei';
+import { useState, useEffect } from 'react';
 
 const models = [
-  "/models/island.glb",
-  "/models/clouds.glb",
-  "/models/football.glb",
-  "/models/camp.glb",
-  "/models/scooter.glb",
-  "/models/tree.glb",
-  "/models/stump.glb",
-  "/models/laptop.glb",
-  "/models/coffee.glb",
-  "/models/controller.glb",
-  "/models/goku.glb",
-  "/models/bonfire.glb",
-  "/models/mushrooms.glb",
-  "/models/cell.glb",
-  "/models/paperplane.glb",
+  '/models/island.glb',
+  '/models/clouds.glb',
+  '/models/football.glb',
+  '/models/camp.glb',
+  '/models/scooter.glb',
+  '/models/tree.glb',
+  '/models/stump.glb',
+  '/models/laptop.glb',
+  '/models/coffee.glb',
+  '/models/controller.glb',
+  '/models/goku.glb',
+  '/models/bonfire.glb',
+  '/models/mushrooms.glb',
+  '/models/cell.glb',
+  '/models/paperplane.glb',
 ];
 
 export const usePreloadAssets = () => {

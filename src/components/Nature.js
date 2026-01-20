@@ -1,8 +1,8 @@
-import { useGLTF } from "@react-three/drei";
+import { useGLTF } from '@react-three/drei';
 
 const Nature = ({ setIsOpen }) => {
-  const mushroom = useGLTF("/models/mushrooms.glb", true);
-  const cell = useGLTF("/models/cell.glb", true);
+  const mushroom = useGLTF('/models/mushrooms.glb', true);
+  const cell = useGLTF('/models/cell.glb', true);
 
   function handleClick(event) {
     event.stopPropagation();
@@ -11,12 +11,7 @@ const Nature = ({ setIsOpen }) => {
 
   return (
     <group position={[2.5, 5, 5.75]}>
-      <primitive
-        object={mushroom.scene}
-        scale={0.275}
-        rotation-y={-2.4}
-        castShadow
-      />
+      <primitive object={mushroom.scene} scale={0.275} rotation-y={-2.4} castShadow />
 
       <primitive
         object={cell.scene}
