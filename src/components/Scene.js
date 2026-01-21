@@ -39,11 +39,16 @@ const Scene = ({
     <>
       <GradientSkySphere />
 
-      <PresentationControls config={{ mass: 2, tension: 400 }} snap>
+      <PresentationControls 
+        config={{ mass: 2, tension: 400 }} 
+        snap 
+        enabled={!isExperienceZoomed}
+      >
         <Float
           rotationIntensity={floating ? 0.24 : 0.15}
           floatIntensity={floating ? 1 : 0.5}
           speed={floating ? 1 : 0.25}
+          enabled={floating}
         >
           <group position-y={-1} rotation-x={-(Math.PI * 0.05)}>
             <Clouds position={[-5.5, 4.5, 0]} scale={4} />
