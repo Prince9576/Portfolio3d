@@ -61,7 +61,7 @@ const Wrapper = () => {
         }}
         camera={{
           near: 0.1,
-          far: 1000,
+          far: 10000,
           fov: isMobileView ? 90 : 75,
           position: isMobileView ? [0, 4, 9] : [0, 4, 7],
         }}

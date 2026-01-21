@@ -69,7 +69,7 @@ const Laptop = memo(({ isExperienceZoomed, setIsExperienceZoomed, setFloating })
       screenBox.getSize(screenSize);
 
       const fov = THREE.MathUtils.degToRad(camera.fov);
-      const fillRatio = isMobile() ? 0.9 : 1.25;
+      const fillRatio = isMobile() ? 0.8 : 1.25;
       const distance = (screenSize.y * 0.5) / Math.tan(fov * 0.5) / fillRatio;
 
       const targetPos = screenWorldPos.clone().add(screenNormal.multiplyScalar(distance));
@@ -100,6 +100,14 @@ const Laptop = memo(({ isExperienceZoomed, setIsExperienceZoomed, setFloating })
       setFloating(false);
     }
   }, [isExperienceZoomed, camera, setIsExperienceZoomed, setFloating, mobile]);
+
+  const screenRotation = mobile
+    ? [-0.34, 0.57, 0.25 + Math.PI / 2]
+    : [-0.34, 0.57, 0.25];
+  const screenPlaneSize = mobile ? [0.62, 0.95] : [0.95, 0.62];
+  const screenStyle = mobile
+    ? { width: '150px', height: '220px' }
+    : { width: '220px', height: '150px' };
 
   const handleDoubleClick = useCallback((event) => {
     if (isExperienceZoomed && mobile) {
@@ -153,6 +161,7 @@ const Laptop = memo(({ isExperienceZoomed, setIsExperienceZoomed, setFloating })
           castShadow
           receiveShadow
           onClick={handleLaptopClick}
+          onPointerDown={handleLaptopClick}
           onDoubleClick={handleDoubleClick}
         />
 
@@ -163,28 +172,30 @@ const Laptop = memo(({ isExperienceZoomed, setIsExperienceZoomed, setFloating })
         <mesh
           ref={screenPlaneRef}
           position={[-0.18, 1.03, -0.18]}
-          rotation={[-0.34, 0.57, 0.25]}
+          rotation={screenRotation}
           visible={false}
         >
-          <planeGeometry args={[0.95, 0.62]} />
+          <planeGeometry args={screenPlaneSize} />
         </mesh>
 
         <Html
           position={[-0.18, 1.03, -0.18]}
-          rotation-x={-0.34}
-          rotation-y={0.57}
-          rotation-z={0.25}
+          rotation={screenRotation}
           distanceFactor={1} 
           transform
           occlude={false}
           zIndexRange={[10, 0]}
+          onPointerDown={handleLaptopClick}
           style={{
-            width: `${220}px`,
-            height: `${150}px`,
-            pointerEvents: isExperienceZoomed ? 'auto' : 'none',
+            ...screenStyle,
+            pointerEvents: 'auto',
             zIndex: 10,
+            opacity: 1,
             userSelect: isExperienceZoomed ? 'auto' : 'none',
             overflow: 'hidden',
+            backgroundColor: '#000',
+            backfaceVisibility: 'hidden',
+            transformStyle: 'preserve-3d',
           }}
         >
           <iframe 
@@ -196,6 +207,7 @@ const Laptop = memo(({ isExperienceZoomed, setIsExperienceZoomed, setFloating })
               border: 'none', 
               backgroundColor: '#000',
               display: 'block',
+              pointerEvents: isExperienceZoomed ? 'auto' : 'none',
             }} 
             allow="autoplay; encrypted-media"
           />
