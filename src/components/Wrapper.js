@@ -10,7 +10,6 @@ import { colors } from '../theme';
 import Loader from './Loader';
 import { isMobile } from '../utils/mobileDetection';
 import Controls from './Controls';
-import Intro from './Intro';
 import { useLoading } from '../contexts/LoadingContext';
 import { usePreloadAssets } from '../hooks/usePreloadAssets';
 
@@ -22,7 +21,6 @@ const Wrapper = () => {
   const { isLoading, setIsLoading } = useLoading();
   const { progress, loaded } = usePreloadAssets();
   const [sceneRendered, setSceneRendered] = useState(false);
-  const [sceneReady, setSceneReady] = useState(false);
 
   const [isMobileView, setIsMobileView] = useState(false);
   const [mobileControls, setMobileControls] = useState({ x: 0, y: 0 });
@@ -70,7 +68,7 @@ const Wrapper = () => {
         dpr={[1, 2]}
         performance={{ min: 0.5 }}
         onCreated={() => {
-          setTimeout(() => setSceneReady(true), 500);
+          // setTimeout(() => setSceneReady(true), 500);
         }}
       >
         <Suspense fallback={null}>
