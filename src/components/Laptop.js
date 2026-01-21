@@ -161,7 +161,6 @@ const Laptop = memo(({ isExperienceZoomed, setIsExperienceZoomed, setFloating })
           castShadow
           receiveShadow
           onClick={handleLaptopClick}
-          onPointerDown={handleLaptopClick}
           onDoubleClick={handleDoubleClick}
         />
 
@@ -185,10 +184,8 @@ const Laptop = memo(({ isExperienceZoomed, setIsExperienceZoomed, setFloating })
           transform
           occlude={false}
           zIndexRange={[10, 0]}
-          onPointerDown={handleLaptopClick}
           style={{
             ...screenStyle,
-            pointerEvents: 'auto',
             zIndex: 10,
             opacity: 1,
             userSelect: isExperienceZoomed ? 'auto' : 'none',
@@ -196,8 +193,32 @@ const Laptop = memo(({ isExperienceZoomed, setIsExperienceZoomed, setFloating })
             backgroundColor: '#000',
             backfaceVisibility: 'hidden',
             transformStyle: 'preserve-3d',
+            position: 'relative',
           }}
         >
+          {/* Transparent overlay to capture clicks when not zoomed */}
+          {!isExperienceZoomed && (
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                zIndex: 1000,
+                cursor: 'pointer',
+                backgroundColor: 'transparent',
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleLaptopClick(e);
+              }}
+              onPointerDown={(e) => {
+                e.stopPropagation();
+                handleLaptopClick(e);
+              }}
+            />
+          )}
           <iframe 
             src="https://www.youtube.com/watch?v=Q7AOvWpIVHU" 
             title="2D Portfolio" 
