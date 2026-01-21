@@ -69,7 +69,20 @@ const Laptop = memo(({ isExperienceZoomed, setIsExperienceZoomed, setFloating })
       screenBox.getSize(screenSize);
 
       const fov = THREE.MathUtils.degToRad(camera.fov);
-      const fillRatio = isMobile() ? 0.8 : 1.25;
+      
+      let fillRatio;
+      if (isMobile()) {
+        const aspectRatio = window.innerWidth / window.innerHeight;
+        const referenceAspectRatio = 375 / 667;
+        const referenceFillRatio = 0.8;
+        
+        fillRatio = referenceFillRatio * (aspectRatio / referenceAspectRatio);
+        
+        fillRatio = Math.max(0.5, Math.min(1.0, fillRatio));
+      } else {
+        fillRatio = 1.25;
+      }
+      
       const distance = (screenSize.y * 0.5) / Math.tan(fov * 0.5) / fillRatio;
 
       const targetPos = screenWorldPos.clone().add(screenNormal.multiplyScalar(distance));
