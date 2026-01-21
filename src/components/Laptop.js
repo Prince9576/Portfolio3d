@@ -47,21 +47,16 @@ const Laptop = memo(({ isExperienceZoomed, setIsExperienceZoomed, setFloating })
           rotation-x={-0.34}
           rotation-y={0.57}
           rotation-z={0.25}
-          distanceFactor={1}
-          scale={0.23}
+          distanceFactor={1} 
           transform={true}
-          occlude
-          zIndexRange={[100, 0]}
           style={{
-            width: `${950}px`,
-            height: `${650}px`,
+            width: `${220}px`,
+            height: `${150}px`,
             pointerEvents: isExperienceZoomed ? 'auto' : 'none',
             zIndex: 10,
           }}
         >
-          <div className='laptop-about-page'>
-            <About />
-          </div>
+          <iframe src="https://www.youtube.com/watch?v=Q7AOvWpIVHU" title="2D Portfolio" style={{ width: '100%', height: '100%', border: 'none', backgroundColor: '#000' }} />
         </Html>
       </group>
 
